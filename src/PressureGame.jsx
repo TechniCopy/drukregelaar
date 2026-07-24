@@ -952,17 +952,26 @@ function FeedbackPopup({ type, text, onClose }) {
 
 function StartScreen({ onStart }) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] gap-6 p-6">
-      <div className="p-4 rounded-full" style={{ background: "linear-gradient(120deg,#0D4868 0%,#1b7f96 55%,#30B5AE 100%)" }}>
-        <Gauge size={64} color="#FFFFFF" />
+    <div className="flex items-center justify-center min-h-[80vh] p-6">
+      <div className="text-center max-w-lg">
+        <h1 className="text-4xl font-extrabold mb-2" style={{ color: '#0D4868' }}>De Drukregulaar</h1>
+        <h2 className="text-xl font-bold italic mb-6" style={{ color: '#5b7280' }}>Ontdek hoe druk het kookpunt bepaalt</h2>
+        <div className="bg-white rounded-2xl p-6 mb-6" style={{ border: '2px solid #0D4868', boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}>
+          <p className="italic leading-relaxed" style={{ color: '#5b7280', lineHeight: 1.7 }}>
+            Beklim de <span className="font-bold">berg</span>, kook water in de <span className="font-bold">hogedrukpan</span> en stel de <span className="font-bold">drukregelaar</span> in. Zo ontdek je hoe <span className="font-bold">druk</span> het <span className="font-bold">kookpunt</span> van een stof bepaalt en wat dat betekent voor de <span className="font-bold">koeltechniek</span>.
+          </p>
+        </div>
+        <div className="inline-flex items-center justify-center w-32 h-20 rounded-lg mb-6" style={{ background: '#f8fbfc', border: '2px solid #0D4868', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.15))' }}>
+          <Gauge size={40} color="#0D4868" />
+        </div>
+        <div>
+          <button onClick={onStart}
+            className="px-10 py-4 text-white rounded-2xl font-extrabold italic text-xl cursor-pointer transition-all hover:brightness-90 active:scale-95"
+            style={{ background: '#1E8F6E', border: '3px solid #0D4868', boxShadow: '0 4px 0 #166F56' }}>
+            Start de game
+          </button>
+        </div>
       </div>
-      <h1 className="text-3xl font-bold italic text-center" style={{ color: C.brownDark }}>
-        De Drukregulaar
-      </h1>
-      <p className="text-center text-lg max-w-md" style={{ color: C.brownLight }}>
-        Ontdek hoe <span className="font-bold">druk</span> het <span className="font-bold">kookpunt</span> bepaalt
-      </p>
-      <GameButton onClick={onStart}>Start de game</GameButton>
     </div>
   );
 }
@@ -1988,9 +1997,8 @@ export default function PressureGame() {
             <ProgressBar screen={screen} score={score} lives={lives} />
           )}
           {(screen === "start" || screen === "end") && (
-            <div className="py-2 px-4 text-center relative">
-              <img src="/studium-beeldmerk.png" alt="Studium" className="h-5 w-auto absolute left-4 top-1/2 -translate-y-1/2" />
-              <span className="font-bold italic" style={{ color: C.white }}>De Drukregulaar</span>
+            <div className="py-2 px-4 flex items-center">
+              <img src="/studium-beeldmerk.png" alt="Studium" className="h-6 w-auto" />
             </div>
           )}
         </div>
@@ -2009,10 +2017,6 @@ export default function PressureGame() {
           />
         )}
 
-        {/* Footer */}
-        <div className="py-3 text-center text-xs" style={{ color: C.brownLight }}>
-          Ontdek hoe <span className="font-bold">druk</span> het <span className="font-bold">kookpunt</span> van een stof bepaalt en pas dit toe op de <span className="font-bold">koeltechniek</span>.
-        </div>
       </div>
     </div>
   );
