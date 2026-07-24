@@ -420,17 +420,17 @@ function ProgressBar({ screen, score, lives }) {
   }, [score]);
 
   return (
-    <div className="flex items-center justify-between px-4 py-2" style={{ background: "transparent" }}>
-      <div className="flex items-center gap-1.5">
-        <img src="/studium-beeldmerk.png" alt="Studium" className="h-5 w-auto mr-2" />
-        <span className="text-sm font-bold mr-1" style={{ color: C.white }}>Ronde:</span>
+    <div className="flex items-center justify-between px-2 py-2 sm:px-4" style={{ background: "transparent" }}>
+      <div className="flex items-center gap-1 sm:gap-1.5">
+        <img src="/studium-beeldmerk.png" alt="Studium" className="h-5 w-auto mr-1 sm:mr-2" />
+        <span className="hidden sm:inline text-sm font-bold mr-1" style={{ color: C.white }}>Ronde:</span>
         {allRounds.map((ar, i) => {
           const isComplete = ar.m < mission || (ar.m === mission && ar.r < round);
           const isCurrent = ar.m === mission && ar.r === round;
           return (
             <div
               key={i}
-              className="w-5 h-5 rounded-full border-2 flex items-center justify-center"
+              className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 rounded-full border-2 flex items-center justify-center"
               style={{
                 background: isComplete ? "#99D3D8" : isCurrent ? C.white : "transparent",
                 borderColor: isComplete ? "#99D3D8" : isCurrent ? C.white : "rgba(255,255,255,0.55)",
@@ -439,21 +439,21 @@ function ProgressBar({ screen, score, lives }) {
           );
         })}
       </div>
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-0.5 sm:gap-1">
         {[0, 1, 2, 3, 4].map((i) => (
-          <span key={i} className="text-lg" style={{ color: i < lives ? "#D92C2C" : "rgba(255,255,255,0.6)" }}>
+          <span key={i} className="text-base sm:text-lg" style={{ color: i < lives ? "#D92C2C" : "rgba(255,255,255,0.6)" }}>
             {i < lives ? "\u2764" : "\u2661"}
           </span>
         ))}
       </div>
       <div
-        className="text-sm font-bold transition-all duration-200"
+        className="text-sm font-bold transition-all duration-200 whitespace-nowrap"
         style={{
           color: scorePop ? "#99D3D8" : C.white,
           transform: scorePop ? "scale(1.5)" : "scale(1)",
         }}
       >
-        Score: {displayScore}
+        <span className="hidden sm:inline">Score: </span>{displayScore}
       </div>
     </div>
   );
@@ -1619,7 +1619,7 @@ function BoilingPointChart({ pressure, activeFluid, highlightFluid }) {
   const pressureX = pToX(pressure);
 
   return (
-    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="max-w-full">
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="max-w-full h-auto">
       {/* Background */}
       <rect width={W} height={H} rx="8" fill={C.creamLight} />
       <rect x={padL} y={padT} width={plotW} height={plotH} fill={C.white} stroke="#dbe7ea" strokeWidth="1" />
