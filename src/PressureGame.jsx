@@ -359,21 +359,21 @@ const M2_R290_TASKS = [
 ];
 
 const TEXTS = {
-  m1_intro: "Water kookt bij 100\u00B0C. Maar is dat altijd zo?\n\nBeklim de berg en ontdek wat er met het kookpunt gebeurt als de luchtdruk verandert!",
+  m1_intro: <>Water kookt bij <span className="font-bold">100\u00B0C</span>. Maar is dat altijd zo?{"\n\n"}Beklim de berg en ontdek wat er met het <span className="font-bold">kookpunt</span> gebeurt als de <span className="font-bold">luchtdruk</span> verandert!</>,
   m1r1_question: "Je staat op zeeniveau. De luchtdruk is 1 bar. Bij welke temperatuur gaat dit water koken?",
   m1r1_correct: "Klopt! Bij een druk van 1 bar kookt water bij 100\u00B0C. Maar wat als we hoger gaan?",
   m1r1_wrong: "Niet helemaal. Op zeeniveau is de luchtdruk 1 bar, en daarbij kookt water bij 100\u00B0C.",
   m1r2_question: "Je staat nu op de top van de Mount Everest! De luchtdruk is hier maar 0,33 bar. Bij welke temperatuur denk je dat water hier kookt?",
   m1r2_correct: "Goed geschat! Op de Mount Everest kookt water al bij 71\u00B0C. Minder druk = lager kookpunt.",
   m1r2_wrong: "Het juiste antwoord is 71\u00B0C. Minder druk = lager kookpunt.",
-  m1r3_intro: "Je bent terug op zeeniveau. Maar nu heb je een hogedrukpan. Door het deksel af te sluiten stijgt de druk in de pan tot 2 bar.",
+  m1r3_intro: <>Je bent terug op zeeniveau. Maar nu heb je een <span className="font-bold">hogedrukpan</span>. Door het deksel af te sluiten stijgt de <span className="font-bold">druk</span> in de pan tot <span className="font-bold">2 bar</span>.</>,
   m1r3_direction: "De druk is nu 2 bar in plaats van 1 bar. Wat denk je: wat gebeurt er met het kookpunt?",
   m1r3_slider: "Stel met de slider in: bij welke temperatuur kookt water bij 2 bar?",
   m1r3_correct: "Bij 2 bar kookt water pas bij 122\u00B0C. Hogere druk = hoger kookpunt!",
   m1r3_wrong: "Het juiste antwoord is 122\u00B0C. Meer druk = hoger kookpunt.",
-  m1_outro: "Je hebt ontdekt dat het kookpunt niet vaststaat. Lagere druk = lager kookpunt, hogere druk = hoger kookpunt. In missie 2 ga jij zelf de druk regelen!",
-  m2_intro: "Nu ga jij zelf aan de knoppen draaien! Je krijgt een drukvat en een drukregelaar. En straks ontdek je hoe een koelinstallatie dit principe slim gebruikt.",
-  m2r1_question: "Speel met de drukregelaar! Wanneer begint het water te koken? Wanneer stopt het?",
+  m1_outro: <>Je hebt ontdekt dat het kookpunt niet vaststaat. <span className="font-bold">Lagere druk = lager kookpunt</span>, <span className="font-bold">hogere druk = hoger kookpunt</span>. In missie 2 ga jij zelf de druk regelen!</>,
+  m2_intro: <>Nu ga jij zelf aan de knoppen draaien! Je krijgt een <span className="font-bold">drukvat</span> en een <span className="font-bold">drukregelaar</span>. En straks ontdek je hoe een <span className="font-bold">koelinstallatie</span> dit principe slim gebruikt.</>,
+  m2r1_question: <>Speel met de <span className="font-bold">drukregelaar</span>! Wanneer begint het water te <span className="font-bold">koken</span>? Wanneer stopt het?</>,
   m2r1_check: "Wat gebeurt er met het kookpunt als je de druk verhoogt?",
   m2r1_correct: "Precies. Jij bepaalt het kookpunt door de druk te kiezen.",
   m2r2_question: "Stel de druk zo in dat water kookt bij de aangegeven temperatuur.",
@@ -381,7 +381,7 @@ const TEXTS = {
   m2r3_intro: "Nu zit er koudemiddel R-290 (propaan) in het vat. R-290 kookt bij 1 bar op -42\u00B0C.",
   m2r3_correct_estimate: "Klopt! R-290 kookt bij 1 bar op -42\u00B0C.",
   m2r3_correct_task: "Uitstekend! Bij ~2,8 bar verdampt R-290 op -10\u00B0C. Dat is het principe van koeltechniek!",
-  ending: "Gefeliciteerd! Het kookpunt hangt af van de druk. In de koeltechniek gebruiken we dit om koudemiddelen te laten verdampen op precies de temperatuur die we willen.",
+  ending: <>Gefeliciteerd! Het <span className="font-bold">kookpunt</span> hangt af van de <span className="font-bold">druk</span>. In de koeltechniek gebruiken we dit om <span className="font-bold">koudemiddelen</span> te laten <span className="font-bold">verdampen</span> op precies de temperatuur die we willen.</>,
 };
 
 // ─── HELPER: screen to mission/round ───
@@ -960,7 +960,7 @@ function StartScreen({ onStart }) {
         De Drukregulaar
       </h1>
       <p className="text-center text-lg max-w-md" style={{ color: C.brownLight }}>
-        Ontdek hoe druk het kookpunt bepaalt
+        Ontdek hoe <span className="font-bold">druk</span> het <span className="font-bold">kookpunt</span> bepaalt
       </p>
       <GameButton onClick={onStart}>Start de game</GameButton>
     </div>
@@ -1542,7 +1542,7 @@ function M2R2Screen({ state, dispatch }) {
       <CardBox className="max-w-lg w-full">
         <p className="text-sm font-medium mb-2" style={{ color: C.brownDark }}>{task.text}</p>
         <p className="text-xs mb-3" style={{ color: C.brownLight }}>
-          Breng de oranje lijn naar de groene streep!
+          Breng de <span className="font-bold">oranje lijn</span> naar de <span className="font-bold">groene streep</span>!
         </p>
         {!taskDone ? (
           <div className="text-center">
@@ -1750,7 +1750,7 @@ function M2R3Screen({ state, dispatch }) {
 
       <CardBox className="max-w-2xl mb-1">
         <p className="text-sm" style={{ color: C.brownDark }}>
-          Elke stof heeft een eigen kookpunt dat afhangt van de druk. Verschuif de drukslider en zoek het juiste kookpunt op de grafiek!
+          Elke stof heeft een eigen <span className="font-bold">kookpunt</span> dat afhangt van de <span className="font-bold">druk</span>. Verschuif de <span className="font-bold">drukslider</span> en zoek het juiste kookpunt op de grafiek!
         </p>
       </CardBox>
 
@@ -2011,7 +2011,7 @@ export default function PressureGame() {
 
         {/* Footer */}
         <div className="py-3 text-center text-xs" style={{ color: C.brownLight }}>
-          Ontdek hoe druk het kookpunt van een stof bepaalt en pas dit toe op de koeltechniek.
+          Ontdek hoe <span className="font-bold">druk</span> het <span className="font-bold">kookpunt</span> van een stof bepaalt en pas dit toe op de <span className="font-bold">koeltechniek</span>.
         </div>
       </div>
     </div>
