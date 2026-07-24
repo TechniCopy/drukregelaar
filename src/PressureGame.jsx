@@ -422,6 +422,7 @@ function ProgressBar({ screen, score, lives }) {
   return (
     <div className="flex items-center justify-between px-4 py-2" style={{ background: "transparent" }}>
       <div className="flex items-center gap-1.5">
+        <img src="/studium-beeldmerk.png" alt="Studium" className="h-5 w-auto mr-2" />
         <span className="text-sm font-bold mr-1" style={{ color: C.white }}>Ronde:</span>
         {allRounds.map((ar, i) => {
           const isComplete = ar.m < mission || (ar.m === mission && ar.r < round);
@@ -1987,7 +1988,8 @@ export default function PressureGame() {
             <ProgressBar screen={screen} score={score} lives={lives} />
           )}
           {(screen === "start" || screen === "end") && (
-            <div className="py-2 px-4 text-center">
+            <div className="py-2 px-4 text-center relative">
+              <img src="/studium-beeldmerk.png" alt="Studium" className="h-5 w-auto absolute left-4 top-1/2 -translate-y-1/2" />
               <span className="font-bold italic" style={{ color: C.white }}>De Drukregulaar</span>
             </div>
           )}
