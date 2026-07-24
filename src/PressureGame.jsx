@@ -71,19 +71,19 @@ function playSound(type) {
   } catch (e) { /* audio not available */ }
 }
 
-// ─── COLORS (matching existing game screenshot) ───
+// ─── COLORS (Studium-huisstijl; gold alleen voor beloningssterren/confetti) ───
 
 const C = {
-  brown: "#5C3A1E",
-  brownDark: "#3C2415",
-  brownLight: "#7A5230",
-  cream: "#F5E6D3",
-  creamLight: "#FFF8F0",
+  brown: "#0D4868",
+  brownDark: "#0D4868",
+  brownLight: "#5b7280",
+  cream: "#f2f7f8",
+  creamLight: "#f8fbfc",
   gold: "#D4A84B",
-  goldLight: "#E8C876",
-  red: "#C0392B",
-  green: "#2E7D32",
-  greenLight: "#4CAF50",
+  goldLight: "#99D3D8",
+  red: "#D92C2C",
+  green: "#1E8F6E",
+  greenLight: "#30B5AE",
   white: "#FFFFFF",
   waterBlue: "#60A5FA",
   r290Green: "#34D399",
@@ -146,7 +146,7 @@ function ConfettiBurst({ x, y, onDone }) {
       vx: (Math.random() - 0.5) * 12,
       vy: (Math.random() - 0.5) * 12 - 4,
       size: 4 + Math.random() * 4,
-      color: [C.gold, C.green, C.red, "#3B82F6", "#FDBA74", "#67E8F9"][Math.floor(Math.random() * 6)],
+      color: [C.gold, C.green, "#30B5AE", "#0D4868", "#99D3D8", "#E08A00"][Math.floor(Math.random() * 6)],
       rotation: Math.random() * 360,
       rotSpeed: (Math.random() - 0.5) * 20,
     }));
@@ -207,7 +207,7 @@ function StreakIndicator({ streak }) {
   return (
     <div className="fixed top-20 right-4 z-[90] animate-bounce">
       <div className="rounded-xl px-4 py-2 shadow-lg border-2 font-bold italic text-sm"
-        style={{ backgroundColor: "#FBBF24", borderColor: C.brownDark, color: C.brownDark }}>
+        style={{ backgroundColor: "#99D3D8", borderColor: C.brownDark, color: C.brownDark }}>
         {streak >= 5 ? "ONSTOPBAAR! " : streak >= 3 ? "COMBO! " : ""}{streak}x op rij!
       </div>
     </div>
@@ -380,7 +380,7 @@ const TEXTS = {
   m2r2_correct: "Goed ingesteld! Je kunt het kookpunt precies sturen door de druk te kiezen.",
   m2r3_intro: "Nu zit er koudemiddel R-290 (propaan) in het vat. R-290 kookt bij 1 bar op -42\u00B0C.",
   m2r3_correct_estimate: "Klopt! R-290 kookt bij 1 bar op -42\u00B0C.",
-  m2r3_correct_task: "Uitstekend! Bij ~2,8 bar verdampt R-290 op -10\u00B0C. D\u00E1t is het principe van koeltechniek!",
+  m2r3_correct_task: "Uitstekend! Bij ~2,8 bar verdampt R-290 op -10\u00B0C. Dat is het principe van koeltechniek!",
   ending: "Gefeliciteerd! Het kookpunt hangt af van de druk. In de koeltechniek gebruiken we dit om koudemiddelen te laten verdampen op precies de temperatuur die we willen.",
 };
 
@@ -420,9 +420,9 @@ function ProgressBar({ screen, score, lives }) {
   }, [score]);
 
   return (
-    <div className="flex items-center justify-between px-4 py-2" style={{ background: C.cream }}>
+    <div className="flex items-center justify-between px-4 py-2" style={{ background: "transparent" }}>
       <div className="flex items-center gap-1.5">
-        <span className="text-sm font-bold mr-1" style={{ color: C.brownDark }}>Ronde:</span>
+        <span className="text-sm font-bold mr-1" style={{ color: C.white }}>Ronde:</span>
         {allRounds.map((ar, i) => {
           const isComplete = ar.m < mission || (ar.m === mission && ar.r < round);
           const isCurrent = ar.m === mission && ar.r === round;
@@ -431,8 +431,8 @@ function ProgressBar({ screen, score, lives }) {
               key={i}
               className="w-5 h-5 rounded-full border-2 flex items-center justify-center"
               style={{
-                background: isComplete ? C.green : isCurrent ? C.brownDark : "transparent",
-                borderColor: isComplete ? C.green : isCurrent ? C.brownDark : C.gold,
+                background: isComplete ? "#99D3D8" : isCurrent ? C.white : "transparent",
+                borderColor: isComplete ? "#99D3D8" : isCurrent ? C.white : "rgba(255,255,255,0.55)",
               }}
             />
           );
@@ -440,7 +440,7 @@ function ProgressBar({ screen, score, lives }) {
       </div>
       <div className="flex items-center gap-1">
         {[0, 1, 2, 3, 4].map((i) => (
-          <span key={i} className="text-lg" style={{ color: i < lives ? C.red : C.gold }}>
+          <span key={i} className="text-lg" style={{ color: i < lives ? "#D92C2C" : "rgba(255,255,255,0.6)" }}>
             {i < lives ? "\u2764" : "\u2661"}
           </span>
         ))}
@@ -448,7 +448,7 @@ function ProgressBar({ screen, score, lives }) {
       <div
         className="text-sm font-bold transition-all duration-200"
         style={{
-          color: scorePop ? "#FBBF24" : C.brownDark,
+          color: scorePop ? "#99D3D8" : C.white,
           transform: scorePop ? "scale(1.5)" : "scale(1)",
         }}
       >
@@ -460,10 +460,10 @@ function ProgressBar({ screen, score, lives }) {
 
 function GameButton({ onClick, children, variant = "primary", disabled = false, className = "" }) {
   const styles = {
-    primary: { background: C.brown, color: C.gold, border: `2px solid ${C.gold}` },
-    secondary: { background: C.cream, color: C.brown, border: `2px solid ${C.brown}` },
-    correct: { background: C.green, color: C.white, border: `2px solid ${C.greenLight}` },
-    wrong: { background: C.red, color: C.white, border: `2px solid #E74C3C` },
+    primary: { background: "#30B5AE", color: C.white, border: "2px solid #0D4868", boxShadow: "0 3px 0 #1F8A84" },
+    secondary: { background: C.white, color: "#0D4868", border: "2px solid #0D4868", boxShadow: "0 3px 0 rgba(0,0,0,0.15)" },
+    correct: { background: "#1E8F6E", color: C.white, border: "2px solid #0D4868", boxShadow: "0 3px 0 #166F56" },
+    wrong: { background: "#D92C2C", color: C.white, border: "2px solid #0D4868", boxShadow: "0 3px 0 rgba(0,0,0,0.2)" },
   };
   const s = styles[variant] || styles.primary;
   return (
@@ -482,7 +482,7 @@ function CardBox({ children, className = "" }) {
   return (
     <div
       className={`rounded-xl p-5 shadow-md ${className}`}
-      style={{ background: C.white, border: `2px solid ${C.brownLight}` }}
+      style={{ background: C.white, border: "2px solid #0D4868" }}
     >
       {children}
     </div>
@@ -517,8 +517,8 @@ function ThermometerSVG({ temperature, minTemp = 0, maxTemp = 150, boilingPoint,
       {/* Ticks */}
       {ticks.map(({ t, y }) => (
         <g key={t}>
-          <line x1={barX + barW + 4} y1={y} x2={barX + barW + 12} y2={y} stroke="#6B7280" strokeWidth="1" />
-          <text x={barX + barW + 15} y={y + 4} fontSize="9" fill="#6B7280">{t}°</text>
+          <line x1={barX + barW + 4} y1={y} x2={barX + barW + 12} y2={y} stroke="#5b7280" strokeWidth="1" />
+          <text x={barX + barW + 15} y={y + 4} fontSize="9" fill="#5b7280">{t}°</text>
         </g>
       ))}
       {/* Boiling point line */}
@@ -583,8 +583,8 @@ function PressureGaugeSVG({ pressure, minP = 0, maxP = 3, unit = "bar" }) {
       <circle cx={cx} cy={cy} r={r - 1} fill="none" stroke="#E5E7EB" strokeWidth="4" />
       {ticks.map((tk, i) => (
         <g key={i}>
-          <line x1={tk.x1} y1={tk.y1} x2={tk.x2} y2={tk.y2} stroke="#6B7280" strokeWidth="1.5" />
-          <text x={tk.lx} y={tk.ly + 4} fontSize="9" fill="#6B7280" textAnchor="middle">{tk.val}</text>
+          <line x1={tk.x1} y1={tk.y1} x2={tk.x2} y2={tk.y2} stroke="#5b7280" strokeWidth="1.5" />
+          <text x={tk.lx} y={tk.ly + 4} fontSize="9" fill="#5b7280" textAnchor="middle">{tk.val}</text>
         </g>
       ))}
       {/* Needle */}
@@ -744,9 +744,9 @@ function PressureSlider({ value, min, max, step, onChange, label, unit = "bar" }
         value={value}
         onChange={(e) => onChange(parseFloat(e.target.value))}
         className="w-full h-2 rounded-lg appearance-none cursor-pointer"
-        style={{ accentColor: C.brown, background: "#D1D5DB" }}
+        style={{ accentColor: "#30B5AE", background: "#dbe7ea" }}
       />
-      <div className="flex justify-between text-xs mt-0.5" style={{ color: "#6B7280" }}>
+      <div className="flex justify-between text-xs mt-0.5" style={{ color: "#5b7280" }}>
         <span>{min} {unit}</span>
         <span>{max} {unit}</span>
       </div>
@@ -857,7 +857,7 @@ function MountainSVG({ activeStop = 0 }) {
           <g key={i}>
             {/* Glow ring for active */}
             {isActive && (
-              <circle cx={s.x} cy={s.y} r="16" fill={C.gold} opacity="0.25">
+              <circle cx={s.x} cy={s.y} r="16" fill="#30B5AE" opacity="0.25">
                 <animate attributeName="r" values="14;18;14" dur="2s" repeatCount="indefinite" />
                 <animate attributeName="opacity" values="0.25;0.1;0.25" dur="2s" repeatCount="indefinite" />
               </circle>
@@ -867,14 +867,14 @@ function MountainSVG({ activeStop = 0 }) {
             {/* Pin body */}
             <circle
               cx={s.x} cy={s.y} r={isActive ? 10 : 7}
-              fill={isActive ? C.gold : isDone ? C.green : "#D1D5DB"}
-              stroke={isActive ? C.brownDark : isDone ? "#1B5E20" : "#9CA3AF"}
+              fill={isActive ? "#30B5AE" : isDone ? C.green : "#D1D5DB"}
+              stroke={isActive ? C.brownDark : isDone ? "#166F56" : "#9CA3AF"}
               strokeWidth={isActive ? 2.5 : 1.5}
               style={{ transition: "all 300ms ease" }}
             />
             {/* Inner icon dot */}
             <circle cx={s.x} cy={s.y} r={isActive ? 3 : 2}
-              fill={isActive ? C.brownDark : isDone ? "white" : "#9CA3AF"}
+              fill={isActive ? C.white : isDone ? "white" : "#9CA3AF"}
             />
             {/* Label */}
             {isActive && (
@@ -904,7 +904,7 @@ function ComparisonView({ columns }) {
           className="rounded-xl p-3 text-center shadow-md flex-1 min-w-[120px] max-w-[180px]"
           style={{
             background: C.creamLight,
-            border: `2px solid ${C.gold}`,
+            border: "2px solid #dbe7ea",
             animationDelay: `${i * 200}ms`,
           }}
         >
@@ -927,7 +927,7 @@ function FeedbackPopup({ type, text, onClose }) {
       <div
         className="mx-4 max-w-md rounded-xl p-5 shadow-xl"
         style={{
-          background: isCorrect ? "#D1FAE5" : "#FEE2E2",
+          background: isCorrect ? "#e8f5f0" : "#fdeaea",
           border: `3px solid ${isCorrect ? C.green : C.red}`,
         }}
         onClick={(e) => e.stopPropagation()}
@@ -952,8 +952,8 @@ function FeedbackPopup({ type, text, onClose }) {
 function StartScreen({ onStart }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] gap-6 p-6">
-      <div className="p-4 rounded-full" style={{ background: C.gold + "30" }}>
-        <Gauge size={64} color={C.brown} />
+      <div className="p-4 rounded-full" style={{ background: "linear-gradient(120deg,#0D4868 0%,#1b7f96 55%,#30B5AE 100%)" }}>
+        <Gauge size={64} color="#FFFFFF" />
       </div>
       <h1 className="text-3xl font-bold italic text-center" style={{ color: C.brownDark }}>
         De Drukregulaar
@@ -1064,8 +1064,8 @@ function M1R1Screen({ state, dispatch }) {
                 onClick={() => !answered && setSelected(opt.value)}
                 className="p-3 rounded-lg text-center font-bold transition-all cursor-pointer"
                 style={{
-                  background: wasRight ? "#D1FAE5" : wasWrong ? "#FEE2E2" : isThis ? C.gold + "40" : C.creamLight,
-                  border: `2px solid ${wasRight ? C.green : wasWrong ? C.red : isThis ? C.gold : C.brownLight}`,
+                  background: wasRight ? "#e8f5f0" : wasWrong ? "#fdeaea" : isThis ? "#e6f4f5" : C.creamLight,
+                  border: `2px solid ${wasRight ? C.green : wasWrong ? C.red : isThis ? "#30B5AE" : "#dbe7ea"}`,
                   color: C.brownDark,
                 }}
               >
@@ -1157,7 +1157,7 @@ function M1R2Screen({ state, dispatch }) {
         {submitted && (
           <div className="mt-3">
             <div className="text-sm mb-2" style={{ color: C.brownDark }}>
-              Jouw schatting: {estimate}°C — Werkelijk: 71°C
+              Jouw schatting: {estimate}°C. Werkelijk: 71°C
             </div>
             <ComparisonView columns={[
               { title: "Zeeniveau", pressure: "1,0", boilingPoint: 100 },
@@ -1207,7 +1207,7 @@ function M1R3Screen({ state, dispatch }) {
       setStep("slider");
     } else {
       setAttempts((a) => a + 1);
-      dispatch({ type: "FEEDBACK", feedback: { type: "incorrect", text: "Denk terug aan de berg: minder druk gaf een lager kookpunt. Wat zou m\u00E9\u00E9r druk dan doen?" } });
+      dispatch({ type: "FEEDBACK", feedback: { type: "incorrect", text: "Denk terug aan de berg: minder druk gaf een lager kookpunt. Wat zou meer druk dan doen?" } });
       if (attempts >= 1) {
         setDirDone(true);
         setStep("slider");
@@ -1261,8 +1261,8 @@ function M1R3Screen({ state, dispatch }) {
                   onClick={() => setDirAnswer(opt.value)}
                   className="p-3 rounded-lg text-left font-medium transition-all cursor-pointer"
                   style={{
-                    background: dirAnswer === opt.value ? C.gold + "40" : C.creamLight,
-                    border: `2px solid ${dirAnswer === opt.value ? C.gold : C.brownLight}`,
+                    background: dirAnswer === opt.value ? "#e6f4f5" : C.creamLight,
+                    border: `2px solid ${dirAnswer === opt.value ? "#30B5AE" : "#dbe7ea"}`,
                     color: C.brownDark,
                   }}
                 >
@@ -1300,7 +1300,7 @@ function M1R3Screen({ state, dispatch }) {
         {submitted && (
           <div className="mt-3">
             <div className="text-sm mb-2" style={{ color: C.brownDark }}>
-              Jouw schatting: {estimate}°C — Werkelijk: 122°C
+              Jouw schatting: {estimate}°C. Werkelijk: 122°C
             </div>
             <ComparisonView columns={[
               { title: "Everest", pressure: "0,33", boilingPoint: 71 },
@@ -1454,8 +1454,8 @@ function M2R1Screen({ state, dispatch }) {
                   onClick={() => setCheckAnswer(i)}
                   className="p-3 rounded-lg text-left font-medium transition-all cursor-pointer"
                   style={{
-                    background: checkAnswer === i ? C.gold + "40" : C.creamLight,
-                    border: `2px solid ${checkAnswer === i ? C.gold : C.brownLight}`,
+                    background: checkAnswer === i ? "#e6f4f5" : C.creamLight,
+                    border: `2px solid ${checkAnswer === i ? "#30B5AE" : "#dbe7ea"}`,
                     color: C.brownDark,
                   }}
                 >
@@ -1612,21 +1612,21 @@ function BoilingPointChart({ pressure, activeFluid, highlightFluid }) {
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="max-w-full">
       {/* Background */}
       <rect width={W} height={H} rx="8" fill={C.creamLight} />
-      <rect x={padL} y={padT} width={plotW} height={plotH} fill={C.white} stroke="#E5E7EB" strokeWidth="1" />
+      <rect x={padL} y={padT} width={plotW} height={plotH} fill={C.white} stroke="#dbe7ea" strokeWidth="1" />
 
       {/* Grid lines - horizontal (temperature) */}
       {tTicks.map((t) => (
         <g key={`t${t}`}>
-          <line x1={padL} y1={tToY(t)} x2={padL + plotW} y2={tToY(t)} stroke="#F3F4F6" strokeWidth="1" />
-          <text x={padL - 6} y={tToY(t) + 4} fontSize="9" fill="#6B7280" textAnchor="end">{t}°</text>
+          <line x1={padL} y1={tToY(t)} x2={padL + plotW} y2={tToY(t)} stroke="#eef4f6" strokeWidth="1" />
+          <text x={padL - 6} y={tToY(t) + 4} fontSize="9" fill="#5b7280" textAnchor="end">{t}°</text>
         </g>
       ))}
 
       {/* Grid lines - vertical (pressure) */}
       {pTicks.map((p) => (
         <g key={`p${p}`}>
-          <line x1={pToX(p)} y1={padT} x2={pToX(p)} y2={padT + plotH} stroke="#F3F4F6" strokeWidth="1" />
-          <text x={pToX(p)} y={padT + plotH + 14} fontSize="9" fill="#6B7280" textAnchor="middle">{p}</text>
+          <line x1={pToX(p)} y1={padT} x2={pToX(p)} y2={padT + plotH} stroke="#eef4f6" strokeWidth="1" />
+          <text x={pToX(p)} y={padT + plotH + 14} fontSize="9" fill="#5b7280" textAnchor="middle">{p}</text>
         </g>
       ))}
 
@@ -1635,8 +1635,8 @@ function BoilingPointChart({ pressure, activeFluid, highlightFluid }) {
       <text x="12" y={padT + plotH / 2} fontSize="10" fill={C.brownDark} textAnchor="middle" fontWeight="bold" transform={`rotate(-90, 12, ${padT + plotH / 2})`}>Temperatuur (°C)</text>
 
       {/* 0°C reference line */}
-      <line x1={padL} y1={tToY(0)} x2={padL + plotW} y2={tToY(0)} stroke="#CBD5E1" strokeWidth="1" strokeDasharray="4,4" />
-      <text x={padL + plotW + 2} y={tToY(0) + 4} fontSize="8" fill="#94A3B8">0°C</text>
+      <line x1={padL} y1={tToY(0)} x2={padL + plotW} y2={tToY(0)} stroke="#99D3D8" strokeWidth="1" strokeDasharray="4,4" />
+      <text x={padL + plotW + 2} y={tToY(0) + 4} fontSize="8" fill="#5b7280">0°C</text>
 
       {/* Boiling curves */}
       {REFRIGERANTS.map((ref) => {
@@ -1767,9 +1767,9 @@ function M2R3Screen({ state, dispatch }) {
           value={sliderVal}
           onChange={(e) => handleSlider(parseFloat(e.target.value))}
           className="w-full h-2 rounded-lg appearance-none cursor-pointer"
-          style={{ accentColor: C.brown, background: "#D1D5DB" }}
+          style={{ accentColor: "#30B5AE", background: "#dbe7ea" }}
         />
-        <div className="flex justify-between text-xs mt-0.5" style={{ color: "#6B7280" }}>
+        <div className="flex justify-between text-xs mt-0.5" style={{ color: "#5b7280" }}>
           <span>0.3 bar</span>
           <span>40 bar</span>
         </div>
@@ -1827,9 +1827,9 @@ function EndScreen({ score, onRestart }) {
 
       {/* Summary table */}
       <div className="w-full max-w-lg overflow-x-auto">
-        <table className="w-full text-sm rounded-lg overflow-hidden" style={{ border: `2px solid ${C.brownLight}` }}>
+        <table className="w-full text-sm rounded-lg overflow-hidden" style={{ border: "2px solid #0D4868" }}>
           <thead>
-            <tr style={{ background: C.brown, color: C.gold }}>
+            <tr style={{ background: C.brown, color: C.white }}>
               <th className="px-3 py-2 text-left font-bold">Stof</th>
               <th className="px-3 py-2 text-left font-bold">Druk</th>
               <th className="px-3 py-2 text-left font-bold">Kookpunt</th>
@@ -1846,7 +1846,7 @@ function EndScreen({ score, onRestart }) {
             ].map((row, i) => (
               <tr key={i} style={{ background: i % 2 === 0 ? C.creamLight : C.cream }}>
                 {row.map((cell, j) => (
-                  <td key={j} className="px-3 py-2" style={{ color: C.brownDark, borderTop: `1px solid ${C.gold}40` }}>
+                  <td key={j} className="px-3 py-2" style={{ color: C.brownDark, borderTop: "1px solid #dbe7ea" }}>
                     {cell}
                   </td>
                 ))}
@@ -1982,13 +1982,13 @@ export default function PressureGame() {
         style={{ animation: juice.shaking ? "shake 0.3s ease-in-out" : "none" }}
       >
         {/* Header bar */}
-        <div className="sticky top-0 z-40 rounded-b-lg shadow-md" style={{ background: C.brownDark }}>
+        <div className="sticky top-0 z-40 rounded-b-lg shadow-md" style={{ background: "linear-gradient(120deg,#0D4868 0%,#1b7f96 55%,#30B5AE 100%)" }}>
           {screen !== "start" && screen !== "end" && (
             <ProgressBar screen={screen} score={score} lives={lives} />
           )}
           {(screen === "start" || screen === "end") && (
             <div className="py-2 px-4 text-center">
-              <span className="font-bold italic" style={{ color: C.gold }}>De Drukregulaar</span>
+              <span className="font-bold italic" style={{ color: C.white }}>De Drukregulaar</span>
             </div>
           )}
         </div>
