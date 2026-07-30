@@ -199,7 +199,7 @@ function StreakIndicator({ streak }) {
   useEffect(() => {
     if (streak < 2) { setVisible(false); return; }
     setVisible(true);
-    const timer = setTimeout(() => setVisible(false), 2000);
+    const timer = setTimeout(() => setVisible(false), 1500);
     return () => clearTimeout(timer);
   }, [streak]);
 
